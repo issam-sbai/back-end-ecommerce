@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/produits")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin("*")
 public class ProduitController {
 
     @Autowired
@@ -42,7 +42,7 @@ public class ProduitController {
     @PostMapping("/user")
     public void addProduit(
             @RequestParam String nom,
-            @RequestParam double prix,
+            @RequestParam int prix,
             @RequestParam String description,
             @RequestParam int quantite,
             @RequestParam int categorie, // Use the selected category's ID
@@ -50,6 +50,7 @@ public class ProduitController {
 
         // Check if the selected category exists
         Categorie categorie1 = serviceCategorie.selectById(categorie);
+        System.out.println(prix);
 
         if (categorie1 != null) {
             // The selected category exists
@@ -84,14 +85,15 @@ public class ProduitController {
             @RequestBody Map<String, Object> requestParams
     ) {
         String nom = (String) requestParams.get("nom");
-        double prix = (double) requestParams.get("prix");
+        int prix = (int) requestParams.get("prix");
         String description = (String) requestParams.get("description");
         int quantite = (int) requestParams.get("quantite");
         int categorie = (int) requestParams.get("categorie");
-        String imageUrl = (String) requestParams.get("imageUrl");
+        String imageUrl = (String) requestParams.get("image");
 
         // Check if the selected category exists
         Categorie categorie1 = serviceCategorie.selectById(categorie);
+        System.out.println(prix);
 
         if (categorie1 != null) {
 
@@ -117,7 +119,7 @@ public class ProduitController {
     public void updateProduit(
             @PathVariable int id,
             @RequestParam String nom,
-            @RequestParam double prix,
+            @RequestParam int prix,
             @RequestParam String description,
             @RequestParam int quantite,
             @RequestParam int categorie, // Use the selected category's ID
@@ -171,7 +173,7 @@ public class ProduitController {
                 existingProduct.setNom((String) requestParams.get("nom"));
             }
             if (requestParams.containsKey("prix")) {
-                existingProduct.setPrix((double) requestParams.get("prix"));
+                existingProduct.setPrix((int) requestParams.get("prix"));
             }
             if (requestParams.containsKey("description")) {
                 existingProduct.setDescription((String) requestParams.get("description"));

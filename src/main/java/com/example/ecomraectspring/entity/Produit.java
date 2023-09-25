@@ -13,7 +13,7 @@ public class Produit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
-    private double prix;
+    private int prix;
     private int quantite;
     private String image;
     private String description;
@@ -21,7 +21,7 @@ public class Produit {
     @JoinColumn(name = "id_c")
     private Categorie categorie;
 
-    public Produit(String nom, double prix, int quantite, String image, String description, Categorie categorie) {
+    public Produit(String nom, int prix, int quantite, String image, String description, Categorie categorie) {
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;
@@ -53,7 +53,7 @@ public class Produit {
         return prix;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
 
