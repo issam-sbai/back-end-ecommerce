@@ -41,18 +41,22 @@ public class CustemUserDetailService implements UserDetailsService {
 		
 
 	}
-	
-	private List<GrantedAuthority> getGrantedAuthority(User u)
-	{
-		List<GrantedAuthority> liste= new ArrayList<>();
-		List<Role> roles=u.getRoles();
-		for(Role r:roles)
-		{
-			liste.add(new SimpleGrantedAuthority(r.getNom_role()));
+
+	private List<GrantedAuthority> getGrantedAuthority(User u) {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		List<Role> roles = u.getRoles();
+		for (Role r : roles) {
+			if (r != null && r.getNom() != null && !r.getNom().isEmpty()) {
+				authorities.add(new SimpleGrantedAuthority(r.getNom()));
+			}
 		}
-		
-		return liste;
-		
+		return authorities;
 	}
+
+
+
+
+
+
 
 }
